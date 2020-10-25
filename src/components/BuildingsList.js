@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import smartmeeting from "../api/smartmeeting";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 
@@ -25,21 +26,33 @@ class BuildingsList extends Component {
   
 
   componentDidMount() {
-    this.getBuildingsList();
+    // this.getBuildingsList();
+  }
+  renderBuildingsList(){
+    return (<List dense={false}>
+      {this.props.buildings.map(({ id, name }) => {
+        return (
+          <ListItem key={id}>
+            <ListItemText primary={name} />
+          </ListItem>
+        );
+      })}
+    </List>);
   }
   render() {
     return (
-      <List dense={false}>
-        {this.state.buildings.map(({ id, name }) => {
-          return (
-            <ListItem key={id}>
-              <ListItemText primary={name} />
-            </ListItem>
-          );
-        })}
-      </List>
+      <div>
+        {this.renderBuildingsList()}
+      </div>
     );
   }
 }
 
-export default BuildingsList;
+const mapStateToProps = (state) =>{
+  
+  return {
+    buildings:state.buildings||[]
+  };
+}
+
+export default connect(mapStateToProps)(BuildingsList);
