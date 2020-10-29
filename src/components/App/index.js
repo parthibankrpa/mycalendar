@@ -1,28 +1,31 @@
-import React from 'react';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import  BuildingsList from '../BuildingsList';
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href='#'>
-        My calendar
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import React from "react";
+// import Container from "@material-ui/core/Container";
+// import Box from "@material-ui/core/Box";
+// import Grid from "@material-ui/core/Grid";
+import {Box, Container, Grid, Paper} from "@material-ui/core";
+
+import Footer from "../Footer";
+import BuildingsList from "../BuildingsList";
+import AddMeeting from '../../Containers/AddMeeting';
 
 export default function App() {
   return (
-    <Container maxWidth="sm">
+    <Container>
+      <Grid container justify="center">
+        <Grid item xs={4}>
+          <Paper elevation={0}>
+            <BuildingsList />
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+            <AddMeeting/>
+        </Grid>
+        <Grid item xs={4}>
+          My meetings
+        </Grid>
+      </Grid>
       <Box my={4}>
-      <BuildingsList/>
-        <Copyright />
+        <Footer />
       </Box>
     </Container>
   );
